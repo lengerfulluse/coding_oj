@@ -1,0 +1,36 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BFS	traverse_tree.cpp	/^void BFS (pNode root) {$/;"	f	signature:(pNode root)
+BFS	traverse_tree.cpp	/^void BFS(pNode root);$/;"	p	file:	signature:(pNode root)
+DFS	traverse_tree.cpp	/^void DFS(pNode root);$/;"	p	file:	signature:(pNode root)
+Node	link_reverse.cpp	/^typedef struct Node {$/;"	s	file:
+Node	link_reverse.cpp	/^}Node, *pNode;$/;"	t	typeref:struct:Node	file:
+Node	traverse_tree.cpp	/^typedef struct Node {$/;"	s	file:
+Node	traverse_tree.cpp	/^}Node, *pNode;$/;"	t	typeref:struct:Node	file:
+Node::ele	link_reverse.cpp	/^    int ele;$/;"	m	struct:Node	file:	access:public
+Node::ele	traverse_tree.cpp	/^    int ele;$/;"	m	struct:Node	file:	access:public
+Node::left	traverse_tree.cpp	/^    Node* left;$/;"	m	struct:Node	file:	access:public
+Node::next	link_reverse.cpp	/^    Node* next;$/;"	m	struct:Node	file:	access:public
+Node::right	traverse_tree.cpp	/^    Node* right;$/;"	m	struct:Node	file:	access:public
+ele	link_reverse.cpp	/^    int ele;$/;"	m	struct:Node	file:	access:public
+ele	traverse_tree.cpp	/^    int ele;$/;"	m	struct:Node	file:	access:public
+init_link	link_reverse.cpp	/^pNode init_link() {$/;"	f	signature:()
+init_link	link_reverse.cpp	/^pNode init_link();$/;"	p	file:	signature:()
+init_tree	traverse_tree.cpp	/^pNode init_tree();$/;"	p	file:	signature:()
+left	traverse_tree.cpp	/^    Node* left;$/;"	m	struct:Node	file:	access:public
+main	link_reverse.cpp	/^int main() {$/;"	f	signature:()
+main	traverse_tree.cpp	/^int main() {$/;"	f	signature:()
+next	link_reverse.cpp	/^    Node* next;$/;"	m	struct:Node	file:	access:public
+pNode	link_reverse.cpp	/^}Node, *pNode;$/;"	t	typeref:struct:Node	file:
+pNode	traverse_tree.cpp	/^}Node, *pNode;$/;"	t	typeref:struct:Node	file:
+print_link	link_reverse.cpp	/^void print_link(pNode root) {$/;"	f	signature:(pNode root)
+print_link	link_reverse.cpp	/^void print_link(pNode root);$/;"	p	file:	signature:(pNode root)
+reverse_link_iter	link_reverse.cpp	/^pNode reverse_link_iter(pNode root) {$/;"	f	signature:(pNode root)
+reverse_link_iter	link_reverse.cpp	/^pNode reverse_link_iter(pNode root);$/;"	p	file:	signature:(pNode root)
+reverse_link_recur	link_reverse.cpp	/^pNode reverse_link_recur(pNode root) {$/;"	f	signature:(pNode root)
+reverse_link_recur	link_reverse.cpp	/^pNode reverse_link_recur(pNode root);$/;"	p	file:	signature:(pNode root)
+right	traverse_tree.cpp	/^    Node* right;$/;"	m	struct:Node	file:	access:public
