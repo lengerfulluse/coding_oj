@@ -1,10 +1,13 @@
 #include<iostream>
 #include<cstdio>
+#include<cstdlib>
 using namespace std;
 void permutate_str(char* str, char* begin);
+void iswap(char* src, char* dest);
 int main() {
-	char *str = "ABC";
-	permutate_str(str, str);
+	char str[] = {"ABDCD"};
+	char* begin = str;
+	permutate_str(str, begin);
 	return 0;
 }
 
@@ -15,13 +18,13 @@ void permutate_str(char* str, char* begin) {
 		return;
 	}
 	for(pos=begin; *pos != '\0'; pos++) {
-		swap(begin,pos);
+		iswap(begin,pos);
 		permutate_str(str, begin+1);
-		swap(begin,pos);
+		iswap(begin,pos);
 	}
 }
 
-void swap(char* src, char* dest) {
+void iswap(char* src, char* dest) {
 	char temp = *src;
 	*src = *dest;
 	*dest = temp;
