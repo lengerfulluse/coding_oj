@@ -1,0 +1,10 @@
+1. 拷贝构造函数：是一种special construction function, and it's definition is:
+X(X & x). and x's type is a const reference.
+浅拷贝：
+如果一个类拥有资源，那么在拷贝是，资源重新分配则是一种深拷贝，反之是浅拷贝。
+
+2.
+虚函数和纯虚函数：虚函数是动态编译的基础，通过在运行时决定所调用的类型，而非虚函数则是一种编译时的多态性。
+即，本质上重载实现的是一种静态多态性，根据调用的指针来决定，而虚函数则是根据实际的调用的类来决定。
+
+3. 在c++中，通常struct 默认的成员是public，而class中默认的成员都是private.
