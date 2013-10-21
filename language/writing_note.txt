@@ -11,3 +11,4 @@ X(X & x). and x's type is a const reference.
 抽象类：类中至少有一个成员函数为纯虚函数。
 
 3. 在c++中，通常struct 默认的成员是public，而class中默认的成员都是private.
+
