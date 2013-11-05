@@ -2,16 +2,25 @@
 #include<iostream>
 #include<string>
 #include<cstring>
+#include<cstdlib>
 using namespace std;
+void arraysize(char arr[10]);
 main()
 {
     string str("hello");
     char *str1="hello";
     char str2[]="welcome you";
     char str3[10]="vector";
+    /* for the pointer in function, sizeof(str) is the sizeof(pointer). */
+    arraysize(str3);
+    void *p = malloc(100);
+    cout<<sizeof(p)<<endl;
     printf("%d %d %d %d %d %d\n",sizeof(str1),sizeof(str2),sizeof("abcd"),sizeof(str3), strlen(str3), sizeof(str));
 }
 
+void arraysize(char arr[10]) {
+    cout<<sizeof(arr)<<endl;
+}
 /* some classical explaination about the sizeof and strlen. 
 *  
 * wrote:
