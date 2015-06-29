@@ -12,6 +12,8 @@ public class Basic_Calculator_II_227 {
     private Collection<String> operators = new ArrayList<>();
     private Map<String, Integer> operatorPriority = new HashMap<>();
     private String curCharSeq = null;
+    private int curCharSeqPos = 0;
+    private int curCharSeqLen = 0;
     Deque<String> dataStack = new ArrayDeque<>();
     Deque<String> operatorStack = new ArrayDeque<>();
 
@@ -42,6 +44,8 @@ public class Basic_Calculator_II_227 {
     public void clearCalculator(String s) {
         /* remove all blank space */
         this.curCharSeq = s.replaceAll(" ", "");
+        this.curCharSeqPos = 0;
+        this.curCharSeqLen = curCharSeq.length();
         dataStack.clear();
         operatorStack.clear();
     }
@@ -65,14 +69,14 @@ public class Basic_Calculator_II_227 {
         String firstOperation = this.getElement();
         dataStack.push(firstOperation);
         /* only one digital situation, return first digital directly */
-        if(curCharSeq.isEmpty()) {
+        if(this.curCharSeqPos == this.curCharSeqLen) {
             result = Integer.valueOf(firstOperation);
             return result;
         }
         operatorStack.push(this.getElement());
         dataStack.push(this.getElement());
         /* push digital element */
-        while (!curCharSeq.isEmpty()) {
+        while (this.curCharSeqPos < this.curCharSeqLen) {
 
             String operator = this.getElement();
             String topOperator = this.EmptyOperator;
@@ -87,16 +91,13 @@ public class Basic_Calculator_II_227 {
              * calculate the current expression, and then put the result into data stack.
              */
             if (operatorPriority.get(operator) > operatorPriority.get(topOperator)) {
-                String leftOperation = dataStack.peek();
-                dataStack.pop();
+                String leftOperation = dataStack.pop();
                 String rightOperation = this.getElement();
                 String expressionResult = this.calculateExpression(leftOperation, operator, rightOperation);
                 dataStack.push(expressionResult);
             } else {
-                String rightOperation = dataStack.peek();
-                dataStack.pop();
-                String leftOperation = dataStack.peek();
-                dataStack.pop();
+                String rightOperation = dataStack.pop();
+                String leftOperation = dataStack.pop();
                 String expressionResult = this.calculateExpression(leftOperation, topOperator, rightOperation);
                 dataStack.push(expressionResult);
                 /* pop the previous top operator, push the current low priority operator */
@@ -107,12 +108,9 @@ public class Basic_Calculator_II_227 {
             }
         }
         if (!operatorStack.isEmpty()) {
-            String rightOperation = dataStack.peek();
-            dataStack.pop();
-            String leftOperation = dataStack.peek();
-            dataStack.pop();
-            String operator = operatorStack.peek();
-            operatorStack.pop();
+            String rightOperation = dataStack.pop();
+            String leftOperation = dataStack.pop();
+            String operator = operatorStack.pop();
             result = Integer.valueOf(this.calculateExpression(leftOperation, operator, rightOperation));
         }
         return result;
@@ -143,19 +141,18 @@ public class Basic_Calculator_II_227 {
     }
 
     private String getElement() {
-        String ele = null;
-        int firstCharIndex = 0;
-        if (curCharSeq == null || curCharSeq.isEmpty()) {
+        String ele;
+        if (this.curCharSeqPos == this.curCharSeq.length()) {
             return null;
         }
-        String firstChar = curCharSeq.substring(firstCharIndex, firstCharIndex + 1);
+        String firstChar = String.valueOf(curCharSeq.charAt(this.curCharSeqPos));
         /* operator situation */
         if (operators.contains(firstChar)) {
             ele = firstChar;
             /* move forward to the next. */
-            this.curCharSeq = curCharSeq.substring(firstCharIndex + 1);
+            this.curCharSeqPos = this.curCharSeqPos + 1;
         } else {
-            ele = getDigitalStr(curCharSeq, firstCharIndex);
+            ele = getDigitalStr();
         }
         return ele;
     }
@@ -163,21 +160,20 @@ public class Basic_Calculator_II_227 {
     /**
      * be capable of getting digital string at the begin of a string.
      *
-     * @param s string start with digital char.
      * @return first digital element
      */
-    private String getDigitalStr(String s, int firstCharIndex) {
-        String digitalStr = "";
+    private String getDigitalStr() {
+        String digitalStr;
         int i;
-        for (i = firstCharIndex; i < s.length(); i++) {
-            Character character = s.charAt(i);
+        for (i = this.curCharSeqPos; i < this.curCharSeqLen; i++) {
+            Character character = this.curCharSeq.charAt(i);
             if (character < '0' || character > '9') {
                 break;
             }
-            digitalStr = digitalStr + character;
         }
+        digitalStr = this.curCharSeq.substring(this.curCharSeqPos, i);
         /* move forward to next. */
-        curCharSeq = curCharSeq.substring(i);
+        this.curCharSeqPos = i;
         return digitalStr;
     }
 
@@ -189,7 +185,7 @@ public class Basic_Calculator_II_227 {
         test_set.add(" 3+5 / 2 ");
         test_set.add("0-2147483648");
 
-        String inputExpression = " 3+534/2 ";
+        String inputExpression = "0";
         System.out.println(basic_calculator_ii_227.calculate(inputExpression));
 
     }
