@@ -12,7 +12,7 @@ package me.hengwei.leetcode;
  * }
  */
 
-public class Invert_Binary_Tree {
+public class Invert_Binary_Tree_226 {
 
     public class TreeNode {
         int val;
@@ -78,7 +78,7 @@ public class Invert_Binary_Tree {
     }
 
     public static void main(String[] args) {
-        Invert_Binary_Tree invert_binary_tree = new Invert_Binary_Tree();
+        Invert_Binary_Tree_226 invert_binary_tree = new Invert_Binary_Tree_226();
         TreeNode node = invert_binary_tree.createTreeForTest();
         invert_binary_tree.traverseTreeInOrder(node);
         TreeNode afterInvertNode = invert_binary_tree.invertTree(node);
