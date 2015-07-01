@@ -10,6 +10,99 @@ import java.util.List;
 public class Three_Sum_15 {
 
     /**
+     * two end search approach.
+     * @param nums input integer arrays.
+     * @return all triplets array sum equals 0.
+     */
+    public List<List<Integer>> threeSum_v1(int[] nums) {
+        int len = nums.length;
+        List<List<Integer>> sum_zero_triplets = new ArrayList<>();
+        if(nums == null || nums.length < 3) {
+            return sum_zero_triplets;
+        }
+
+        /* quick sort first to avoid duplicate */
+        quickSort(nums, 0, len-1);
+
+        /* two-end search */
+        int smallEnd=0, largeEnd=len-1, sum;
+        while(smallEnd < largeEnd - 1) {
+            sum = nums[smallEnd] + nums[largeEnd];
+            int sumSmallEnd=smallEnd, sumLargeEnd=largeEnd;
+            int sumSmall = sum, sumLarge = sum;
+            int loopSum = sum;
+            System.out.println("Search 3rd for : " + nums[smallEnd] + "\t" + nums[largeEnd]);
+            int posSmall = smallEnd + 1, posLarge = largeEnd - 1;
+            while(sumLarge == 0 || sumSmall == 0) {
+                int index = posSmall;
+                while(index < posLarge) {
+                    if(nums[index] == 0) {
+                        System.out.println("Matched :" + nums[index]);
+                        List<Integer> triplet = this.createTriplet(smallEnd, index, largeEnd);
+                        if(!sum_zero_triplets.contains(triplet)) {
+                            sum_zero_triplets.add(triplet);
+                        }
+                        break;
+                    }
+                    index++;
+                }
+                sumSmall = nums[largeEnd] + nums[posSmall];
+                posSmall = posSmall + 1;
+                sumLarge = nums[smallEnd] + nums[posLarge];
+                posLarge = posLarge - 1;
+                sumSmallEnd = smallEnd + 1;
+                sumLargeEnd = largeEnd - 1;
+            }
+            /* sum large then 0, search third from small end */
+            if(sumLarge > 0 || sumSmall > 0) {
+                sum = nums[sumSmallEnd] + nums[largeEnd];
+                loopSum = sum + nums[posSmall];
+                /* keep increasing 3rd value gradually*/
+                while(loopSum < 0 && posSmall < largeEnd) {
+                    System.out.println("Small End Searching :" + nums[posSmall] + "\t Sum: " + loopSum);
+                    posSmall++;
+                    loopSum = sum + nums[posSmall];
+                }
+                if(loopSum == 0) {
+                    System.out.println("Matched :" + nums[posSmall]);
+                    List<Integer> triplet = this.createTriplet(sumSmallEnd, posSmall, largeEnd);
+                    if(!sum_zero_triplets.contains(triplet)) {
+                        sum_zero_triplets.add(triplet);
+                    }
+                }
+                largeEnd--;
+            }
+            if(sumSmall < 0 || sumLarge < 0){ /* sum small then 0, search third from large end */
+                sum = nums[smallEnd] + nums[sumLargeEnd];
+                loopSum = sum + nums[posLarge];
+                /* keep decreasing 3rd value gradually */
+                while(loopSum > 0 && posLarge > smallEnd) {
+                    System.out.println("Large End Searching :" + nums[posLarge] + "\t Sum: " + loopSum);
+                    posLarge--;
+                    loopSum = sum + nums[posLarge];
+                }
+                if(loopSum == 0) {
+                    System.out.println("Matched :" + nums[posLarge]);
+                    List<Integer> triplet = createTriplet(smallEnd, posLarge, sumLargeEnd);
+                    if(!sum_zero_triplets.contains(triplet)) {
+                        sum_zero_triplets.add(triplet);
+                    }
+                }
+                smallEnd++;
+            }
+        }
+        return sum_zero_triplets;
+    }
+
+    private List<Integer> createTriplet(int small, int middle, int large) {
+        List<Integer> triplet = new ArrayList<>();
+        triplet.add(small);
+        triplet.add(middle);
+        triplet.add(large);
+        return triplet;
+    }
+
+    /**
      *  Simple enumerate method with O(n^3) complexity.
      * @param nums input integer arrays.
      * @return all triplets array sum equals 0
@@ -75,15 +168,24 @@ public class Three_Sum_15 {
 
     public static void main(String[] args) {
         Three_Sum_15 three_sum_15 = new Three_Sum_15();
-        int[] nums = new int[]{5, -2, 9, -6, 7, 8, -2, 4, 1, 3, 1};
+        int[] nums = new int[]{-2, -1, -1, 0, 1, 1, 2};
         three_sum_15.quickSort(nums, 0, nums.length-1);
         for(int i=0; i<nums.length; i++) {
-            System.out.print(nums[i]+"\t");
+            System.out.print(nums[i] + "\t");
         }
-        System.out.println("Partition Done");
+
+        System.out.println("Quick sort done!");
 
         List<List<Integer>> sum_zero_triplets = three_sum_15.threeSum(nums);
         Iterator it = sum_zero_triplets.iterator();
+        while(it.hasNext()) {
+            List<Integer> triplet = (List<Integer>)it.next();
+            System.out.println(triplet.toString());
+        }
+
+        System.out.println("V1 result:");
+        List<List<Integer>> sum_zero_triplets_v1 = three_sum_15.threeSum_v1(nums);
+        it = sum_zero_triplets_v1.iterator();
         while(it.hasNext()) {
             List<Integer> triplet = (List<Integer>)it.next();
             System.out.println(triplet.toString());
