@@ -8,29 +8,29 @@ import java.util.Map;
  */
 public class NumArray_303 {
     Map<String, Integer> rangeMap = new HashMap<>();
-    int length;
+    int[] nums;
     public NumArray_303(int[] nums)
     {
-        this.length = nums.length;
-        int i, j;
-        for(i=0; i<this.length; i++)
-        {
-            int sum = nums[i];
-            rangeMap.put(String.valueOf(i)+":"+String.valueOf(i), sum);
-            for(j=i+1; j<this.length; j++)
-            {
-                sum += nums[j];
-                rangeMap.put(String.valueOf(i)+":"+String.valueOf(j), sum);
-            }
-        }
+        this.nums = nums;
     }
 
     public int sumRange(int i, int j)
     {
         i = Math.max(i, 0);
-        j = Math.min(j, this.length);
+        j = Math.min(j, nums.length);
         String key = String.valueOf(i)+":"+String.valueOf(j);
-        return rangeMap.get(key);
+        if(rangeMap.containsKey(key))
+        {
+            return rangeMap.get(key);
+        }
+        int tmp=i, sum=0;
+        while(tmp<=j)
+        {
+            sum += nums[tmp];
+            rangeMap.put(String.valueOf(i)+":"+String.valueOf(tmp), sum);
+            tmp++;
+        }
+        return sum;
     }
 
     public static void main(String[] args)
