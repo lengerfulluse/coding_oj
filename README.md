@@ -1,2 +1,2 @@
 # coding_oj
-online judge coding practice
+Personal problem solutions of online coding judge. It'll be great if it happens to be useful for you.
