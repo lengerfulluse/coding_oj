@@ -16,3 +16,4 @@ hs_err_pid*
 coding_oj.iml
 *.out
 input
+out/

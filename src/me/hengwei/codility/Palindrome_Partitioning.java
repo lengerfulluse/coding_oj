@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package me.hengwei.codility;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -13,7 +14,6 @@ public class Palindrome_Partitioning {
 
     public static void main(String[] args) {
         String s = "aab";
-        ArrayList
         List<List<String>> result = Palindrome_Partitioning.partition(s);
         ListIterator<List<String>> listIterator = result.listIterator();
         while(listIterator.hasNext()) {

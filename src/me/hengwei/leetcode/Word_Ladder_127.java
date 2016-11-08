@@ -29,7 +29,7 @@ public class Word_Ladder_127 {
                     char c = word.charAt(i);
                     if(j == c)
                         continue;
-                    word.setCharAt(i, j);
+                    word.setCharAt(i, (char)j);
                     if (visited.contains(word.toString())) {
                         continue;
                     }
