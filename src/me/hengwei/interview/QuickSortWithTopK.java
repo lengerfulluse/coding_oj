@@ -62,7 +62,7 @@ public class QuickSortWithTopK {
 
     public static void main(String[] args) {
 
-        int[] array = new int[] {-1, 10, 8, 23, 78, 11, 6, -2, 9, 0, 100};
+        int[] array = new int[] {-1, 10, 88, 23, 78, 11, 6, -2, 9, 0, 100};
         int k = 3;
         QuickSortWithTopK.quickSortWithTopK(array, k);
     }
